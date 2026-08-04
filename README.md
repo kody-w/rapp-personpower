@@ -10,12 +10,20 @@ same for automation: it defines **personpower** so that any automated
 process — a testing harness, a deployment pipeline, an agent doing a
 person's clicking — can carry one honest, comparable number.
 
+Personpower answers one question: **how many persons is this AI equal
+to** — for the same work done manually?
+
 > **1 personpower (1 pp) = one attentive, competent power user performing
 > the task hands-on at the interface, without dawdling and without
 > assistance.**
 
-An automation's rating is how many of those people it replaces on a given
-workload, measured on the stopwatch:
+Horsepower rates the engine, not the trip — and pp does the same. A
+run-rating scores one workload; an engine-rating scores the machine: sum
+what an on-device AI (a brainstem) is actually doing across all of its
+workloads, and you can tell a **Ferrari brainstem** from an okay
+**Model T** — and everything in between — with one comparable number.
+
+The measurement primitive is the run-rating, on the stopwatch:
 
 ```
 P (pp) = T_person / T_engine
@@ -32,6 +40,23 @@ of 33 checks across two surfaces — clicks, dialog expectations, layout
 measurements, URL-parameter verification, a file download inspected.
 Hand-executed by a power user: ~20 minutes. The automated harness,
 measured with `/usr/bin/time`: **19.1 seconds**. Rating: **~60 pp**.
+
+## Rating an engine (the Ferrari / Model T scale)
+
+A brainstem's **engine-rating** is the sum of its run-ratings over a
+representative period, weighted by how often each workload actually runs:
+
+```
+P_engine (pp) = Σ over workloads w:  P_w × runs_w(period) × T_engine_w / period
+```
+
+— in words: across everything the device's AI did in the period, how many
+attentive humans would it have taken to do the same by hand, sustained?
+A Model T brainstem runs a couple of light workloads and idles: single
+digits. A Ferrari runs a testing harness, a deploy pipeline, a research
+sweep and a filing clerk concurrently, all day: hundreds. Registries can
+list an agent's measured pp the way spec sheets list horsepower — and the
+same rules below keep the number honest.
 
 ## The attention corollary
 
