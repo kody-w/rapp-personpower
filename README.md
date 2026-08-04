@@ -1,4 +1,4 @@
-# RAPP Personpower (pp)
+# RAPP Personpower (rpp)
 
 **A universal unit for rating automation, the way horsepower rates
 engines.**
@@ -6,18 +6,18 @@ engines.**
 In 1783 James Watt needed to sell steam engines to people who owned
 horses, so he measured what a horse could sustain and priced his machines
 in the buyer's own units. The unit outlived the horse. This repo does the
-same for automation: it defines **personpower** so that any automated
+same for automation: it defines **RAPP personpower (rpp)** so that any automated
 process — a testing harness, a deployment pipeline, an agent doing a
 person's clicking — can carry one honest, comparable number.
 
 Personpower answers one question: **how many persons is this AI equal
 to** — for the same work done manually?
 
-> **1 personpower (1 pp) = one attentive, competent power user performing
+> **1 RAPP personpower (1 rpp) = one attentive, competent power user performing
 > the task hands-on at the interface, without dawdling and without
 > assistance.**
 
-Horsepower rates the engine, not the trip — and pp does the same. A
+Horsepower rates the engine, not the trip — and rpp does the same. A
 run-rating scores one workload; an engine-rating scores the machine: sum
 what an on-device AI (a brainstem) is actually doing across all of its
 workloads, and you can tell a **Ferrari brainstem** from an okay
@@ -26,7 +26,7 @@ workloads, and you can tell a **Ferrari brainstem** from an okay
 The measurement primitive is the run-rating, on the stopwatch:
 
 ```
-P (pp) = T_person / T_engine
+P (rpp) = T_person / T_engine
 ```
 
 - **T_person** — wall-clock time for one attentive power user to execute
@@ -39,7 +39,7 @@ P (pp) = T_person / T_engine
 of 33 checks across two surfaces — clicks, dialog expectations, layout
 measurements, URL-parameter verification, a file download inspected.
 Hand-executed by a power user: ~20 minutes. The automated harness,
-measured with `/usr/bin/time`: **19.1 seconds**. Rating: **~60 pp**.
+measured with `/usr/bin/time`: **19.1 seconds**. Rating: **~60 rpp**.
 
 ## Rating an engine (the Ferrari / Model T scale)
 
@@ -47,15 +47,15 @@ A brainstem's **engine-rating** is the sum of its run-ratings over a
 representative period, weighted by how often each workload actually runs:
 
 ```
-P_engine (pp) = Σ over workloads w:  P_w × runs_w(period) × T_engine_w / period
+P_engine (rpp) = Σ over workloads w:  P_w × runs_w(period) × T_engine_w / period
 ```
 
 — in words: across everything the device's AI did in the period, how many
 attentive humans would it have taken to do the same by hand, sustained?
 A Model T brainstem runs a couple of light workloads and idles: single
-digits. A Ferrari runs a testing harness, a deploy pipeline, a research
+digits of rpp. A Ferrari runs a testing harness, a deploy pipeline, a research
 sweep and a filing clerk concurrently, all day: hundreds. Registries can
-list an agent's measured pp the way spec sheets list horsepower — and the
+list an agent's measured rpp the way spec sheets list horsepower — and the
 same rules below keep the number honest.
 
 ## The attention corollary
@@ -85,9 +85,9 @@ automation runs (usually ≈ 0, so A is effectively unbounded — say
    absence checks ("this must NOT be visible") belong in the checklist on
    both sides.
 4. **No fake pulls.** If the engine skipped a check, it doesn't count.
-   A run that didn't execute rates 0 pp, loudly.
-5. **State the workload.** A pp rating is per-workload, like horsepower
-   is per-engine: "60 pp on a 33-check UI regression pass", not "60 pp"
+   A run that didn't execute rates 0 rpp, loudly.
+5. **State the workload.** An rpp rating is per-workload, like horsepower
+   is per-engine: "60 rpp on a 33-check UI regression pass", not "60 rpp"
    in the void.
 
 ## Estimating T_person: the rate table
@@ -97,13 +97,13 @@ automation runs (usually ≈ 0, so A is effectively unbounded — say
 URL/parameter inspection, devtools layout measurement, download-and-open,
 form fill, console review. Sum the checklist against the table when a
 live human measurement is impractical. The table is versioned; cite the
-version with your rating (e.g. `61 pp (rates v1)`).
+version with your rating (e.g. `61 rpp (rates v1)`).
 
 ## Calculator
 
 ```
 python3 personpower.py --checks checks.json --engine-seconds 19.1
-# -> {"T_person_s": 1155, "T_engine_s": 19.1, "personpower": 60.5, "rates": "v1"}
+# -> {"T_person_s": 1155, "T_engine_s": 19.1, "rpp": 60.5, "rates": "v1"}
 ```
 
 `checks.json` is a list of `{"type": "<rate-table key>", "count": N}`

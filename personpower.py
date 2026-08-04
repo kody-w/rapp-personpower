@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""personpower.py — compute a RAPP Personpower (pp) rating.
+"""personpower.py — compute a RAPP Personpower (rpp) rating.
 
     python3 personpower.py --checks checks.json --engine-seconds 19.1
     python3 personpower.py --person-seconds 1200 --engine-seconds 19.1
@@ -57,7 +57,7 @@ def main():
     print(json.dumps({
         "T_person_s": round(tp, 1),
         "T_engine_s": a.engine_seconds,
-        "personpower": round(tp / a.engine_seconds, 1),
+        "rpp": round(tp / a.engine_seconds, 1),
         "rates": ver,
         "note": "state the workload with the number (rule 5)",
     }, indent=2))
